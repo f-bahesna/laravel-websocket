@@ -1,0 +1,6 @@
+"chat::auth.user-authentication":
+    type: message
+    message: user-authentication
+    path: users/auth
+    methods: [ POST ]
+    rules: [ "chat::auth.user-authentication" ]

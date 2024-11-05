@@ -8,6 +8,7 @@
     "require": {
         "php": ">=8.0",
         "laravel/tinker": "^2.7",
+        "lcobucci/jwt": "^4.0",
         "pandawa/pandawa": "^4.3"
     },
     "require-dev": {

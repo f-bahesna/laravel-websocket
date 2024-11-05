@@ -1,0 +1,3 @@
+"chat::auth.user-authentication":
+    constraints:
+        phone: "required|string"

@@ -3,3 +3,7 @@ ping:
     methods: [get]
     path: ping
     presenter: ping
+
+auth:
+    type: group
+    children: _auth.yaml
