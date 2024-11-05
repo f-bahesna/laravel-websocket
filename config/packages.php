@@ -6,4 +6,7 @@ return [
 
     Chat\Auth\ChatAuthMainModule::class,
     Chat\User\ChatUserMainModule::class,
+    Chat\Chatroom\ChatChatroomMainModule::class,
+    Chat\Message\ChatMessageMainModule::class,
+    Chat\UserChatroom\ChatUserChatroomMainModule::class,
 ];

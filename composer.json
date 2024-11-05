@@ -7,9 +7,11 @@
     "prefer-stable": true,
     "require": {
         "php": ">=8.0",
+        "beyondcode/laravel-websockets": "^1.14",
         "laravel/tinker": "^2.7",
         "lcobucci/jwt": "^4.0",
-        "pandawa/pandawa": "^4.3"
+        "pandawa/pandawa": "^4.3",
+        "pusher/pusher-php-server": "^7.2"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",

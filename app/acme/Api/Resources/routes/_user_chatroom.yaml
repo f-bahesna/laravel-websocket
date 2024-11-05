@@ -1,0 +1,13 @@
+"chat:chatroom.create-user-chatroom":
+    type: message
+    message: create-user-chatroom
+    path: chatrooms/users/{user}/create
+    methods: [ POST ]
+    rules: [ "chat:user-chatroom.create-user-chatroom" ]
+
+"chat:chatroom.join-user-chatroom":
+    type: message
+    message: join-user-chatroom
+    path: chatrooms/{chatroom}/users/{user}/join
+    methods: [ POST ]
+    rules: [ "chat:user-chatroom.join-user-chatroom" ]

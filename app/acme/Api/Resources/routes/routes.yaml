@@ -8,3 +8,7 @@ ping:
 auth:
     type: group
     children: _auth.yaml
+
+user_chatroom:
+    type: group
+    children: _user_chatroom.yaml
