@@ -1,5 +1,7 @@
 <?php
 
+use Chat\User\Model\User;
+
 return [
 
     /*
@@ -45,6 +47,11 @@ return [
             'driver' => 'authenticator',
             'provider' => 'users',
         ],
+
+        'user' => [
+            'driver' => 'user',
+            'provider' => 'users'
+        ]
     ],
 
     /*
@@ -67,7 +74,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => User::class,
         ],
 
         'stateless' => [

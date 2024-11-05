@@ -6,6 +6,7 @@ namespace Chat\Auth\Guard;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\UserProvider;
+use Illuminate\Http\Request;
 use Lcobucci\JWT\Configuration;
 
 /**
@@ -13,7 +14,9 @@ use Lcobucci\JWT\Configuration;
  */
 class ChatUserGuard implements Guard
 {
+
     public function __construct(
+        protected Request $request,
         protected UserProvider $provider
     )
     {
@@ -21,31 +24,12 @@ class ChatUserGuard implements Guard
 
     public function check()
     {
-        return true;
+        return $this->user();
     }
 
     public function guest()
     {
         // TODO: Implement guest() method.
-    }
-
-    public function user()
-    {
-        $token = $this->fetchToken();
-
-        if(null !== $token){
-            $config = Configuration::forUnsecuredSigner();
-            $user = $config->parser()->parse($token)->claims()->get('jti');
-            if($user){
-                if(null !== $retrieve = $this->provider->retrieveById($user)){
-                    return $retrieve;
-                }
-
-                throw new \LogicException("unauthorized", 401);
-            }
-        }
-
-        throw new \LogicException("invalid token", 409);
     }
 
     public function id()
@@ -79,5 +63,24 @@ class ChatUserGuard implements Guard
         }
 
         return null;
+    }
+
+    public function user(): ?Authenticatable
+    {
+        $token = $this->fetchToken();
+
+        if(null !== $token){
+            $config = Configuration::forUnsecuredSigner();
+            $user = $config->parser()->parse($token)->claims()->get('jti');
+            if($user){
+                if(null !== $retrieve = $this->provider->retrieveById($user)){
+                    return $retrieve;
+                }
+
+                abort(401, "unauthorized.");
+            }
+        }
+
+        abort(409, "invalid token.");
     }
 }
