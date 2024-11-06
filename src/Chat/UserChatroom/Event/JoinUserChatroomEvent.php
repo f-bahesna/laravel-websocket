@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Chat\UserChatroom\Event;
 
-use BeyondCode\LaravelWebSockets\WebSockets\Channels\PresenceChannel;
 use Chat\Message\Model\Message;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Queue\SerializesModels;
 use Pandawa\Component\Message\AbstractMessage;
@@ -24,9 +24,13 @@ class JoinUserChatroomEvent extends AbstractMessage implements ShouldBroadcast
         return $this->message;
     }
 
-    public function broadcastOn()
+    public function broadcastOn(): PresenceChannel
     {
-        $channel = new PresenceChannel('chatroom.' . $this->message->chatroom_id);
-        dd(json_encode($channel));
+        return new PresenceChannel('chatroom.' . $this->getMessage()->chatroom_id);
+    }
+
+    public function broadcastAs(): string
+    {
+        return sprintf('user [%s] joined', $this->getMessage()->user->name);
     }
 }

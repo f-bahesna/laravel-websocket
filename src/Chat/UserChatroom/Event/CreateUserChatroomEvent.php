@@ -15,7 +15,7 @@ use Pandawa\Component\Message\AbstractMessage;
  */
 class CreateUserChatroomEvent extends AbstractMessage implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use InteractsWithSockets, SerializesModels;
 
     private string $chatroom;
 
@@ -27,17 +27,12 @@ class CreateUserChatroomEvent extends AbstractMessage implements ShouldBroadcast
     public function broadcastOn(): Channel
     {
         return new Channel(
-            sprintf('%s', $this->getChatroom())
+            sprintf('chatroom.%s', $this->getChatroom())
         );
     }
 
-//        public function broadcastOn()
-//        {
-//            return ['public'];
-//        }
-//
-//        public function broadcastAs()
-//        {
-//            return 'chat';
-//        }
+    public function broadcastAs(): string
+    {
+        return 'room.created';
+    }
 }

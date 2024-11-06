@@ -1,0 +1,8 @@
+User:
+    type: resource
+    resource: user
+    only: [ index, show ]
+    path: users
+    methods: [GET]
+    options:
+        paginate: true

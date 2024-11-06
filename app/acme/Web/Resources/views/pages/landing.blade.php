@@ -1,87 +1,81 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Pandawa</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-    <!-- Styles -->
-    <style>
-        html, body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Raleway', sans-serif;
-            font-weight: 100;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .full-height {
-            height: 100vh;
-        }
-
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .content {
-            text-align: center;
-        }
-
-        .title {
-            font-size: 84px;
-        }
-
-        .links > a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .m-b-md {
-            margin-bottom: 30px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Whatsapp Clone</title>
+    <link rel="stylesheet" href="{{ asset("assets/css/chat.css") }}">
 </head>
 <body>
-<div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
-                <a href="{{ route('register') }}">Register</a>
-            @endauth
-        </div>
-    @endif
+<div id="app" class="app">
 
-    <div class="content">
-        <div class="title m-b-md">
-            Pandawa
+    <!-- LEFT SECTION -->
+    <section id="main-left" class="main-left">
+        <!-- header -->
+        <div id="header-left" class="header-left">
+            Mini Chat
         </div>
-    </div>
+
+{{--        <!-- chat list -->--}}
+        <div id="chat-list" class="chat-list">
+            <!-- user lists -->
+            @foreach($users as $user)
+                @php
+                    $avatar = "ava".(rand(1,8)).".jpg";
+                @endphp
+                <div class="friends" data-id="{{ $user->id }}" data-name="{{ $user->name }}" data-avatar="{{ asset("assets/images"."/".$avatar) }}">
+                    <!-- photo -->
+                    <div class="profile friends-photo">
+                        <img src="{{ asset("assets/images"."/".$avatar) }}" alt="">
+                    </div>
+
+                    <div class="friends-credent">
+                        <!-- name -->
+                        <span class="friends-name">{{ $user->name }}</span>
+                        <!-- last message -->
+                        <span class="friends-message friend-status">Offline</span>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </section>
+
+
+    <!-- RIGHT SECTION -->
+    <section id="main-empty" class="main-right">
+        <p style="text-align: center; font-size: 35px">Welcome to whatsapp clone</p>
+    </section>
+    <section id="main-right" class="main-right hidden">
+        <!-- header -->
+        <div id="header-right" class="header-right">
+            <!-- profile pict -->
+            <div id="header-img" class="profile header-img">
+                <img src="{{ asset("assets/images/ava2.jpg") }}" alt="">
+            </div>
+
+            <!-- name -->
+            <h4 class="name friend-name">Donal Tramp</h4>
+        </div>
+
+        <!-- chat area -->
+        <div id="chat-area" class="chat-area">
+            <!-- chat content -->
+
+        </div>
+
+        <!-- typing area -->
+        <div id="typing-area" class="typing-area">
+            <!-- input form -->
+            <input id="type-area" class="type-area" placeholder="Type something...">
+        </div>
+    </section>
 </div>
+<div id="creator" class="creator">
+    <p>Login as  <span>{{ auth()->user() }}</span></p>
+</div>
+@vite('resources/assets/js/app.js')
+<script src="{{ asset("assets/js/chat.js") }}"></script>
+<script src="{{ asset("assets/js/function.js") }}"></script>
 </body>
 </html>

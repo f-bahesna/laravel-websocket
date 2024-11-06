@@ -37,7 +37,7 @@ final class JoinUserChatroomHandler
         broadcast(
             new JoinUserChatroomEvent(
                 [
-                    'message' => $messageModel
+                    "message" => $messageModel
                 ]
             )
         )->toOthers();

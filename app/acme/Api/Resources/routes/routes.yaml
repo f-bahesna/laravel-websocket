@@ -5,6 +5,10 @@ ping:
     middleware: ["auth:user"]
     presenter: ping
 
+user:
+    type: group
+    children: _user.yaml
+
 auth:
     type: group
     children: _auth.yaml

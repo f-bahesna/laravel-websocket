@@ -11,6 +11,15 @@
 |
 */
 
-Broadcast::channel('App.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+use Illuminate\Support\Facades\Broadcast;
+
+/**
+ * @
+ */
+Broadcast::channel('chatroom.{chatroom}', function ($user, $chatroom) {
+    if($user->canJoinRoom($chatroom)){
+        return ['id' => $user->id, 'name' => $user->name ];
+    }
+
+    return null;
 });
