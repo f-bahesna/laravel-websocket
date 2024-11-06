@@ -4,6 +4,7 @@
     only: [index]
     methods: [GET]
     path: /chatrooms/{chatroom}/messages
+    middleware: ["auth:user"]
     options:
         repos:
             index:
@@ -16,6 +17,7 @@
     message: send-message
     path: /chatrooms/{chatroom}/users/{user}/send-message
     methods: [POST]
+    middleware: ["auth:user"]
     rules: ["chat::message.send-message"]
 
 "chat::message.send-attachment":
@@ -23,4 +25,5 @@
     message: send-attachment
     path: /chatrooms/{chatroom}/users/{user}/send-attachment
     methods: [POST]
+    middleware: ["auth:user"]
     rules: ["chat::message.send-attachment"]
