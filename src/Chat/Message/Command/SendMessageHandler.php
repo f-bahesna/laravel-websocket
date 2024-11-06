@@ -8,6 +8,7 @@ use Chat\Message\DTO\SendMessageDTO;
 use Chat\Message\Event\SendMessageEvent;
 use Chat\Message\Repository\MessageRepository;
 use Chat\Message\Service\SendMessageService;
+use Chat\User\Finder\UserFinder;
 use Chat\UserChatroom\Exception\UserNotFoundInRoomException;
 use Chat\UserChatroom\Finder\UserChatroomFinder;
 use Chat\UserChatroom\Model\UserChatroom;
@@ -20,9 +21,9 @@ final class SendMessageHandler
 {
     public function __construct(
         private SendMessageService $service,
-        private ChatroomFinder $chatroomFinder,
         private UserChatroomFinder $userChatroomFinder,
-        private MessageRepository  $messageRepository
+        private MessageRepository  $messageRepository,
+        private UserFinder $userFinder
     )
     {
     }
@@ -33,11 +34,13 @@ final class SendMessageHandler
 
       $userChatroom = $this->userChatroomFinder->findOneByChatroom($message->getChatroom());
 
-      $messageService = $this->service->send(
+        $user = $this->userFinder->findOrFail($message->getUser());
+
+        $messageService = $this->service->send(
             new SendMessageDTO(
                 [
                     'chatroom' => $userChatroom->chatroom_id,
-                    'user' => $message->getUser(),
+                    'user' => $user->name,
                     'text' => $message->getText()
                 ]
             )
@@ -49,7 +52,7 @@ final class SendMessageHandler
           new SendMessageEvent(
               $message->getText(),
               $userChatroom->chatroom_id,
-              $message->getUser(),
+              $user->name,
         )
       );
 

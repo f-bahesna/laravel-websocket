@@ -3,3 +3,9 @@
         chatroom: "required|exists:chatrooms,id"
         user: "required|exists:users,id"
         text: "required|string|max:200"
+
+"chat::message.send-attachment":
+    constraints:
+        chatroom: "required|exists:chatrooms,id"
+        user: "required|exists:users,id"
+        attachment: "required|required|mimes:jpeg,png,jpg,gif,mp4,mov,avi,wmv"

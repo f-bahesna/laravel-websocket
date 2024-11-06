@@ -13,6 +13,7 @@ use Pandawa\Component\Ddd\AbstractModel;
  * @property string $chatroom_id
  * @property string $user_id
  * @property string $text
+ * @property string $attachment
  * @author frada <fbahezna@gmail.com>
  */
 class Message extends AbstractModel

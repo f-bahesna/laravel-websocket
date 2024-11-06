@@ -17,3 +17,10 @@
     path: /chatrooms/{chatroom}/users/{user}/send-message
     methods: [POST]
     rules: ["chat::message.send-message"]
+
+"chat::message.send-attachment":
+    type: message
+    message: send-attachment
+    path: /chatrooms/{chatroom}/users/{user}/send-attachment
+    methods: [POST]
+    rules: ["chat::message.send-attachment"]

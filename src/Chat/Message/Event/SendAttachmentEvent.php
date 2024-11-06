@@ -11,22 +11,26 @@ use Illuminate\Foundation\Events\Dispatchable;
 /**
  * @author frada <fbahezna@gmail.com>
  */
-class SendMessageEvent implements ShouldBroadcast
+class SendAttachmentEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets;
 
-    public $message,$chatroom,$username;
+    private string $chatroom;
+
+    private string $username;
+
+    private string $attachment;
 
     /**
-     * @param $message
-     * @param $chatroom
-     * @param $username
+     * @param string $chatroom
+     * @param string $username
+     * @param string $attachment
      */
-    public function __construct($message, $chatroom, $username)
+    public function __construct(string $chatroom, string $username, string $attachment)
     {
-        $this->message = $message;
         $this->chatroom = $chatroom;
         $this->username = $username;
+        $this->attachment = $attachment;
     }
 
     public function broadcastOn()
@@ -38,6 +42,6 @@ class SendMessageEvent implements ShouldBroadcast
 
     public function broadcastAs()
     {
-        return sprintf('user [%s] send message.', $this->username);
+        return sprintf('user [%s] send an attachment in [%s].', $this->username, $this->attachment);
     }
 }
