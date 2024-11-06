@@ -42,4 +42,9 @@ class UserChatroomFinder extends AbstractModelFinder
 
         return null;
     }
+
+    public function countUserChatroom(string $chatroom): int
+    {
+        return $this->repo()->findAll()->count();
+    }
 }

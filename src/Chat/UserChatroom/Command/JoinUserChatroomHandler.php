@@ -6,6 +6,7 @@ namespace Chat\UserChatroom\Command;
 use Chat\Chatroom\Finder\ChatroomFinder;
 use Chat\User\Finder\UserFinder;
 use Chat\UserChatroom\Event\JoinUserChatroomEvent;
+use Chat\UserChatroom\Finder\UserChatroomFinder;
 use Chat\UserChatroom\Model\UserChatroom;
 use Chat\UserChatroom\Repository\UserChatroomRepository;
 
@@ -17,6 +18,7 @@ final class JoinUserChatroomHandler
     public function __construct(
         private ChatroomFinder $chatroomFinder,
         private UserFinder $userFinder,
+        private UserChatroomFinder $userChatroomFinder,
         private UserChatroomRepository $userChatroomRepository
     )
     {
@@ -25,9 +27,13 @@ final class JoinUserChatroomHandler
     public function handle(JoinUserChatroom $message): UserChatroom
     {
         $chatroomFinder = $this->chatroomFinder->findOrFail($message->getChatroom());
+
+        //validate max chatroom
+        $this->assertValidateChatroomMaximum($message->getChatroom(), $chatroomFinder->max);
+
         $userFinder = $this->userFinder->findOrFail($message->getUser());
 
-        $userChatroom = new UserChatroom();
+        $userChatroom = $this->userChatroomFinder->findOneByChatroom($message->getChatroom());
         $userChatroom->chatroom()->associate($chatroomFinder);
         $userChatroom->user()->associate($userFinder);
 
@@ -42,5 +48,12 @@ final class JoinUserChatroomHandler
         )->toOthers();
 
         return $userChatroom;
+    }
+
+    private function assertValidateChatroomMaximum(string $chatroom, int $max): void
+    {
+        if($max > $this->userChatroomFinder->countUserChatroom($chatroom)){
+            abort(409, "This chatroom is already at maximum capacity.");
+        }
     }
 }
