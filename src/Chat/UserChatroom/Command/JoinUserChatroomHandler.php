@@ -33,7 +33,7 @@ final class JoinUserChatroomHandler
 
         $userFinder = $this->userFinder->findOrFail($message->getUser());
 
-        $userChatroom = $this->userChatroomFinder->findOneByChatroom($message->getChatroom());
+        $userChatroom = $this->userChatroomFinder->findOneByChatroom($chatroomFinder->getId());
         $userChatroom->chatroom()->associate($chatroomFinder);
         $userChatroom->user()->associate($userFinder);
 
