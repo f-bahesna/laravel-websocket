@@ -19,3 +19,7 @@ chatroom:
 user_chatroom:
     type: group
     children: _user_chatroom.yaml
+
+message:
+    type: group
+    children: _message.yaml

@@ -10,5 +10,12 @@ use Pandawa\Component\Ddd\Repository\Repository;
  */
 class MessageRepository extends Repository
 {
+    public function findAllMessageByChatroom(string $chatroom)
+    {
+        $qb = $this->createQueryBuilder();
 
+        $qb->where('chatroom_id', $chatroom);
+
+        return $this->execute($qb);
+    }
 }

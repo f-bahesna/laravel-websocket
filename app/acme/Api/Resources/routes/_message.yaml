@@ -1,0 +1,12 @@
+"chat::message.list":
+    type: resource
+    resource: message
+    only: [index]
+    methods: [GET]
+    path: /chatrooms/{chatroom}/messages
+    options:
+        repos:
+            index:
+                call: findAllMessageByChatroom
+                arguments: [chatroom]
+        paginate: true
