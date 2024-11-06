@@ -1,0 +1,8 @@
+chatroom:
+    type: resource
+    resource: chatroom
+    path: chatrooms
+    methods: [GET]
+    only: [ index ]
+    options:
+        paginate: true

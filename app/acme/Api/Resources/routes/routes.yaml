@@ -2,7 +2,6 @@ ping:
     type: presenter
     methods: [get]
     path: ping
-    middleware: ["auth:user"]
     presenter: ping
 
 user:
@@ -12,6 +11,10 @@ user:
 auth:
     type: group
     children: _auth.yaml
+
+chatroom:
+    type: group
+    children: _chatroom.yaml
 
 user_chatroom:
     type: group

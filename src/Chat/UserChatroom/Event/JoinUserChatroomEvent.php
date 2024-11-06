@@ -34,3 +34,4 @@ class JoinUserChatroomEvent extends AbstractMessage implements ShouldBroadcast
         return sprintf('user [%s] joined', $this->getMessage()->user->name);
     }
 }
+
