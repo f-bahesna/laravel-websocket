@@ -27,7 +27,7 @@ final class JoinUserChatroomHandler
     public function handle(JoinUserChatroom $message): UserChatroom
     {
         $chatroomFinder = $this->chatroomFinder->findOrFail($message->getChatroom());
-
+        dd($chatroomFinder);
         //validate max chatroom
         $this->assertValidateChatroomMaximum($message->getChatroom(), $chatroomFinder->max);
 
