@@ -10,27 +10,20 @@ use Pandawa\Component\Support\NameableClassTrait;
 /**
  * @author frada <fbahezna@gmail.com>
  */
-final class CreateUserChatroom extends AbstractCommand implements NameableMessageInterface
+final class LeaveUserChatroom extends AbstractCommand implements NameableMessageInterface
 {
     use NameableClassTrait;
 
-    private string $title;
-    private int $max;
-
     private string $user;
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    public function getMax(): int
-    {
-        return $this->max;
-    }
+    private string $chatroom;
 
     public function getUser(): string
     {
         return $this->user;
+    }
+
+    public function getChatroom(): string
+    {
+        return $this->chatroom;
     }
 }
