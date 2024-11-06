@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Chat\UserChatroom\Event;
 
 use Chat\Message\Model\Message;
+use Chat\UserChatroom\Model\UserChatroom;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -17,9 +18,9 @@ class JoinUserChatroomEvent extends AbstractMessage implements ShouldBroadcast
 {
     use InteractsWithSockets, SerializesModels;
 
-    private Message $message;
+    private UserChatroom $message;
 
-    public function getMessage(): Message
+    public function getMessage(): UserChatroom
     {
         return $this->message;
     }

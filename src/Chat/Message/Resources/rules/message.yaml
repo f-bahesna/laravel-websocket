@@ -1,0 +1,5 @@
+"chat::message.send-message":
+    constraints:
+        chatroom: "required|exists:chatrooms,id"
+        user: "required|exists:users,id"
+        text: "required|string|max:200"

@@ -10,3 +10,10 @@
                 call: findAllMessageByChatroom
                 arguments: [chatroom]
         paginate: true
+
+"chat::message.send-message":
+    type: message
+    message: send-message
+    path: /chatrooms/{chatroom}/users/{user}/send-message
+    methods: [POST]
+    rules: ["chat::message.send-message"]

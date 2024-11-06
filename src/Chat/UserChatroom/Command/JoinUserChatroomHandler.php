@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace Chat\UserChatroom\Command;
 
 use Chat\Chatroom\Finder\ChatroomFinder;
-use Chat\Message\Model\Message;
-use Chat\Message\Repository\MessageRepository;
 use Chat\User\Finder\UserFinder;
 use Chat\UserChatroom\Event\JoinUserChatroomEvent;
+use Chat\UserChatroom\Model\UserChatroom;
+use Chat\UserChatroom\Repository\UserChatroomRepository;
 
 /**
  * @author frada <fbahezna@gmail.com>
@@ -17,31 +17,30 @@ final class JoinUserChatroomHandler
     public function __construct(
         private ChatroomFinder $chatroomFinder,
         private UserFinder $userFinder,
-        private MessageRepository $messageRepository
+        private UserChatroomRepository $userChatroomRepository
     )
     {
     }
 
-    public function handle(JoinUserChatroom $message): Message
+    public function handle(JoinUserChatroom $message): UserChatroom
     {
         $chatroomFinder = $this->chatroomFinder->findOrFail($message->getChatroom());
         $userFinder = $this->userFinder->findOrFail($message->getUser());
 
-        $messageModel = new Message();
-        $messageModel->chatroom()->associate($chatroomFinder);
-        $messageModel->user()->associate($userFinder);
-        $messageModel->text = $message->getText();
+        $userChatroom = new UserChatroom();
+        $userChatroom->chatroom()->associate($chatroomFinder);
+        $userChatroom->user()->associate($userFinder);
 
-        $this->messageRepository->save($messageModel);
+        $this->userChatroomRepository->save($userChatroom);
 
         broadcast(
             new JoinUserChatroomEvent(
                 [
-                    "message" => $messageModel
+                    "message" => $userChatroom
                 ]
             )
         )->toOthers();
 
-        return $messageModel;
+        return $userChatroom;
     }
 }

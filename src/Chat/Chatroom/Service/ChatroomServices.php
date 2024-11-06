@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Chat\Chatroom\Services;
+namespace Chat\Chatroom\Service;
 
 use Chat\Chatroom\Model\Chatroom;
 use Chat\UserChatroom\Command\CreateUserChatroom;

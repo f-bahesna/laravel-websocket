@@ -7,7 +7,6 @@
 "chat:user-chatroom.join-user-chatroom":
     constraints:
         chatroom: "required|exists:chatrooms,id"
-        text: "required|string"
         user: "required|exists:users,id"
 
 "chat:user-chatroom.leave-user-chatroom":

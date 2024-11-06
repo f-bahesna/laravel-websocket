@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Chat\UserChatroom\Services;
+namespace Chat\UserChatroom\Service;
 
 use Chat\Chatroom\Finder\ChatroomFinder;
 use Chat\Chatroom\Model\Chatroom;
@@ -14,7 +14,6 @@ use Chat\UserChatroom\Model\UserChatroom;
  */
 final class UserChatroomService
 {
-
     public function __construct(
         private ChatroomFinder $chatRoomFinder,
         private UserFinder     $userFinder

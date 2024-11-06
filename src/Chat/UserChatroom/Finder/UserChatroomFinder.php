@@ -33,4 +33,13 @@ class UserChatroomFinder extends AbstractModelFinder
 
         return null;
     }
+
+    public function findOneByChatroom(string $chatroom): UserChatroom|null
+    {
+        if(null !== $userChatroom = $this->repo()->findOneBy(['chatroom_id' => $chatroom])){
+            return $userChatroom;
+        }
+
+        return null;
+    }
 }

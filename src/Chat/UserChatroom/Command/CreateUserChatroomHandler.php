@@ -6,11 +6,11 @@ namespace Chat\UserChatroom\Command;
 use Chat\Chatroom\Finder\ChatroomFinder;
 use Chat\Chatroom\Model\Chatroom;
 use Chat\Chatroom\Repository\ChatroomRepository;
-use Chat\Chatroom\Services\ChatroomServices;
+use Chat\Chatroom\Service\ChatroomServices;
 use Chat\UserChatroom\Event\CreateUserChatroomEvent;
 use Chat\UserChatroom\Model\UserChatroom;
 use Chat\UserChatroom\Repository\UserChatroomRepository;
-use Chat\UserChatroom\Services\UserChatroomService;
+use Chat\UserChatroom\Service\UserChatroomService;
 
 /**
  * @author frada <fbahezna@gmail.com>
