@@ -27,7 +27,7 @@ final class JoinUserChatroomHandler
     public function handle(JoinUserChatroom $message): UserChatroom
     {
         $chatroomFinder = $this->chatroomFinder->findOrFail($message->getChatroom());
-        dd($chatroomFinder);
+
         //validate max chatroom
         $this->assertValidateChatroomMaximum($message->getChatroom(), $chatroomFinder->max);
 
@@ -35,6 +35,7 @@ final class JoinUserChatroomHandler
 
         $userChatroom = $this->userChatroomFinder->findOneByChatroom($chatroomFinder->getId());
         $userChatroom->chatroom()->associate($chatroomFinder);
+        dd($userChatroom);
         $userChatroom->user()->associate($userFinder);
 
         $this->userChatroomRepository->save($userChatroom);
