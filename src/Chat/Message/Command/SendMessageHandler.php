@@ -40,7 +40,7 @@ final class SendMessageHandler
             new SendMessageDTO(
                 [
                     'chatroom' => $userChatroom->chatroom_id,
-                    'user' => $user->name,
+                    'user' => $user->getId(),
                     'text' => $message->getText()
                 ]
             )

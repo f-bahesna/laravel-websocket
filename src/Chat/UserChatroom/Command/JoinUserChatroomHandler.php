@@ -52,7 +52,7 @@ final class JoinUserChatroomHandler
 
     private function assertValidateChatroomMaximum(string $chatroom, int $max): void
     {
-        if($max > $this->userChatroomFinder->countUserChatroom($chatroom)){
+        if($this->userChatroomFinder->countUserChatroom($chatroom) > $max){
             abort(409, "This chatroom is already at maximum capacity.");
         }
     }
