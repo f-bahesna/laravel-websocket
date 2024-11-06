@@ -4,5 +4,6 @@ chatroom:
     path: chatrooms
     methods: [GET]
     only: [ index ]
+    middleware: ["auth:user"]
     options:
         paginate: true
