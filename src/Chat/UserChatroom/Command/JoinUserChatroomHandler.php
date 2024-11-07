@@ -30,10 +30,12 @@ final class JoinUserChatroomHandler
 
         //validate max chatroom
         $this->assertValidateChatroomMaximum($message->getChatroom(), $chatroomFinder->max);
+        //validate user exists in a room
+        $this->assertValidationUserExistsInRoom($message->getUser());
 
         $userFinder = $this->userFinder->findOrFail($message->getUser());
 
-        $userChatroom = $this->userChatroomFinder->findOneByChatroom($chatroomFinder->getId());
+        $userChatroom = new UserChatroom();
 
         $userChatroom->chatroom()->associate($chatroomFinder);
         $userChatroom->user()->associate($userFinder);
@@ -49,6 +51,13 @@ final class JoinUserChatroomHandler
         )->toOthers();
 
         return $userChatroom;
+    }
+
+    private function assertValidationUserExistsInRoom(string $user): void
+    {
+        if(null !== $this->userChatroomFinder->findOneByUser($user)){
+            abort(409, "User already joined in room .");
+        }
     }
 
     private function assertValidateChatroomMaximum(string $chatroom, int $max): void
