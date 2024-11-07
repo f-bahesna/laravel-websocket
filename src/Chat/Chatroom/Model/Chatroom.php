@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Chat\Chatroom\Model;
 
 use Chat\Message\Relation\HasManyMessage;
+use Chat\UserChatroom\Relation\HasManyUserChatroom;
 use Pandawa\Component\Ddd\AbstractModel;
 
 /**
@@ -13,5 +14,5 @@ use Pandawa\Component\Ddd\AbstractModel;
  */
 class Chatroom extends AbstractModel
 {
-    use HasManyMessage;
+    use HasManyMessage, HasManyUserChatroom;
 }

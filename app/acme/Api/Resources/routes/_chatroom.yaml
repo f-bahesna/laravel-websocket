@@ -3,10 +3,10 @@ chatroom:
     resource: chatroom
     path: chatrooms
     methods: [GET]
-    only: [ index ]
+    only: [ index, show ]
     middleware: ["auth:user"]
     options:
         paginate: true
         withs:
-            index:
-                - messages
+            show:
+                - messages.user
