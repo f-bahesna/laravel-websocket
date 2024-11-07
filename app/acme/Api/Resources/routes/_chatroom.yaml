@@ -7,3 +7,7 @@ chatroom:
     middleware: ["auth:user"]
     options:
         paginate: true
+        withs:
+            index:
+                - messages
+        
